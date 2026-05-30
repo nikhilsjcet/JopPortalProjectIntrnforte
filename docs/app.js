@@ -953,4 +953,38 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.documentElement.setAttribute("data-theme", nextTheme);
         localStorage.setItem("talenthub_theme", nextTheme);
     });
+
+    // 12. Dynamic Database Status Checker
+    async function checkDatabaseStatus() {
+        const badge = document.getElementById("db-status-badge");
+        const badgeText = document.getElementById("db-status-text");
+        if (!badge || !badgeText) return;
+
+        try {
+            const response = await fetch('/api/db-status');
+            if (response.ok) {
+                const status = await response.json();
+                if (status.isMocked) {
+                    badge.className = "db-status-badge mongo-fallback";
+                    badgeText.textContent = "JSON Storage";
+                    badge.title = "Resilient local JSON database active. Connect to MongoDB in production.";
+                } else {
+                    badge.className = "db-status-badge mongo-active";
+                    badgeText.textContent = "MongoDB Active";
+                    badge.title = "Connected to live MongoDB Database!";
+                }
+            } else {
+                badge.className = "db-status-badge mongo-fallback";
+                badgeText.textContent = "Offline";
+                badge.title = "Express API backend unreachable.";
+            }
+        } catch (e) {
+            badge.className = "db-status-badge mongo-fallback";
+            badgeText.textContent = "Offline";
+            badge.title = "Express API backend unreachable.";
+        }
+    }
+
+    // Run checker immediately on load
+    checkDatabaseStatus();
 });
