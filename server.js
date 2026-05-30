@@ -30,6 +30,7 @@ setTimeout(async () => {
             })
             .catch(err => {
                 console.error("MongoDB connection failed! Please ensure MongoDB is running or configure MONGODB_URI.", err);
+                db.switchToMockFallback(); // Auto-heal: Switch back to local JSON fallback dynamically
             });
     }
 }, 500);

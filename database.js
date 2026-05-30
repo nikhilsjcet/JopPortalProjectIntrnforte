@@ -575,6 +575,14 @@ async function initializeDatabase() {
     }
 }
 
+function switchToMockFallback() {
+    dbDelegates.User = MockUserClass;
+    dbDelegates.Job = MockJobClass;
+    dbDelegates.Application = MockApplicationClass;
+    dbDelegates.isMocked = true;
+    dbDelegates.connectionString = 'none';
+}
+
 initializeDatabase();
 
 module.exports = {
@@ -583,5 +591,6 @@ module.exports = {
     get Application() { return dbDelegates.Application; },
     get isMocked() { return dbDelegates.isMocked; },
     get connectionString() { return dbDelegates.connectionString; },
+    switchToMockFallback,
     hashPassword
 };
