@@ -1,0 +1,94 @@
+{
+  "users": [
+    {
+      "id": "usr_5dohpci6v",
+      "username": "stellar_corp",
+      "passwordHash": "dc2b916781a4b934399322641b71368f20e07158bcc3516f97d1513dc95f3de2",
+      "role": "employer",
+      "profile": {
+        "companyName": "Stellar Systems Co.",
+        "companyDetails": "Stellar Systems is a premier systems engineering and web engineering collective focusing on distributed databases and high-performance frontend interfaces.",
+        "contact": "careers@stellar.co"
+      }
+    },
+    {
+      "id": "usr_1x13gmck9",
+      "username": "nikhil",
+      "passwordHash": "4dbb1f9b930e42ee1e6a41789412c2ef45c4e6e8f34b743c479b6085ab498a9c",
+      "role": "seeker",
+      "profile": {
+        "contact": "nikhilska14@gmail.com",
+        "skills": [
+          "java"
+        ],
+        "experience": "fd"
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job_o6vgte29h",
+      "employerId": "usr_5dohpci6v",
+      "title": "Senior Rust Systems Architect",
+      "description": "We are seeking a senior systems software architect to build out high-performance database middleware frameworks. You will leverage Axum, Tokio, and lock-free thread structures to engineer distributed log networks.",
+      "requirements": [
+        "5+ Years systems engineering experience",
+        "Proficiency in Rust, Tokio, and Cargo dependencies",
+        "Familiarity with SQLite, relational engines, and TCP streams",
+        "Degree in Computer Science or equivalent practical exposure"
+      ],
+      "location": "Bengaluru (Hybrid)",
+      "jobType": "Full-time",
+      "salaryRange": "₹24,00,000 - ₹36,00,000 PA",
+      "deadline": "2026-07-15",
+      "filled": false,
+      "datePosted": "2026-05-30"
+    },
+    {
+      "id": "job_vtgmfo2vi",
+      "employerId": "usr_5dohpci6v",
+      "title": "UI/UX Full-Stack Engineer",
+      "description": "Join our core UI experience group to engineer gorgeous, micro-interaction-driven web clients. You will build clean glassmorphic components, fluid CSS transition layers, and reactive vanilla JS states connected to Node APIs.",
+      "requirements": [
+        "3+ Years frontend or fullstack experience",
+        "Deep knowledge of HTML5, CSS Variables, and responsive Flex/Grid rules",
+        "Experience with Node.js, Express, and REST API payload integrations",
+        "Strong aesthetic eye for sleek, harmonization dark/light modes"
+      ],
+      "location": "Remote",
+      "jobType": "Remote",
+      "salaryRange": "₹12,00,000 - ₹18,00,000 PA",
+      "deadline": "2026-06-30",
+      "filled": false,
+      "datePosted": "2026-05-30"
+    },
+    {
+      "id": "job_5b5s3x2l0",
+      "employerId": "usr_5dohpci6v",
+      "title": "Marketing & Community Operations Manager",
+      "description": "Help scale our open-source developer hub! You will lead community outreach, design premium branding materials, coordinate technical blog releases, and represent the brand at national systems engineering meetups.",
+      "requirements": [
+        "2+ Years technical product marketing or community management",
+        "Familiarity with open-source communities and GitHub workflow systems",
+        "Excellent descriptive copy writing and presentation layouts",
+        "Basic HTML/CSS editing to tweak landing frameworks"
+      ],
+      "location": "New Delhi (On-site)",
+      "jobType": "Full-time",
+      "salaryRange": "₹8,00,000 - ₹11,00,000 PA",
+      "deadline": "2026-08-01",
+      "filled": false,
+      "datePosted": "2026-05-30"
+    }
+  ],
+  "applications": [
+    {
+      "id": "app_i80pnll30",
+      "jobId": "job_vtgmfo2vi",
+      "seekerId": "usr_1x13gmck9",
+      "coverLetter": "good",
+      "dateApplied": "2026-05-30",
+      "status": "Pending"
+    }
+  ]
+}

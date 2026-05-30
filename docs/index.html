@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalentHub | Open-Source Job Portal</title>
+    <meta name="description" content="Connect with top-tier employers, search verified high-paying roles, submit profiles, and manage recruiters pipeline applications seamlessly on TalentHub.">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- ==========================================
+             FIXED NAVIGATION BAR
+             ========================================== -->
+        <header>
+            <div class="container header-inner">
+                <!-- Portal Logo -->
+                <div class="logo" id="nav-logo">
+                    Talent<span class="logo-highlight">Hub</span>
+                </div>
+
+                <!-- Central Navigation Links -->
+                <nav class="nav-links">
+                    <a href="#" class="nav-link active" id="nav-explore">Explore Jobs</a>
+                    <a href="#" class="nav-link" id="nav-seeker-dash" style="display: none;">My Dashboard</a>
+                    <a href="#" class="nav-link" id="nav-employer-dash" style="display: none;">Recruiter Panel</a>
+                </nav>
+
+                <!-- Right-hand User Management Actions -->
+                <div class="nav-actions">
+                    <!-- Light/Dark Mode Switcher -->
+                    <button class="nav-btn" id="theme-toggle" aria-label="Toggle Dark Mode">
+                        <svg class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    </button>
+
+                    <!-- Authentication State Toggles -->
+                    <div id="auth-state-container">
+                        <button class="btn-primary" id="login-trigger-btn">Sign In</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ==========================================
+             MAIN CONTAINER VIEWS
+             ========================================== -->
+        <main>
+            <div class="container">
+
+                <!-- 1. EXPLORE JOBS VIEW -->
+                <section class="view-section active animate-fade" id="explore-view">
+                    <!-- Hero Banner -->
+                    <div class="hero-section">
+                        <div class="hero-banner" style="background-image: url('assets/hero_banner.png');">
+                            <div class="hero-overlay"></div>
+                            <div class="hero-content">
+                                <span class="hero-badge">OPEN SOURCE CAPSTONE</span>
+                                <h1 class="hero-title">Your Next Career Chapter Starts Here.</h1>
+                                <p class="hero-desc">Discover verified listings from top-tier tech groups. Apply directly with custom developer profiles and manage recruitment progress.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Filter Panel -->
+                    <div class="search-panel">
+                        <div class="search-field query-field">
+                            <span class="search-field-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            </span>
+                            <input type="text" id="search-query" placeholder="Job titles, keywords, required skills...">
+                        </div>
+                        
+                        <div class="search-field select-field">
+                            <span class="search-field-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            </span>
+                            <select id="search-location">
+                                <option value="all">Any Location</option>
+                                <option value="Remote">Remote</option>
+                                <option value="Bengaluru">Bengaluru</option>
+                                <option value="New Delhi">New Delhi</option>
+                                <option value="Mumbai">Mumbai</option>
+                            </select>
+                        </div>
+
+                        <div class="search-field select-field">
+                            <span class="search-field-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                            </span>
+                            <select id="search-type">
+                                <option value="all">Any Job Type</option>
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                                <option value="Remote">Remote</option>
+                                <option value="Contract">Contract</option>
+                            </select>
+                        </div>
+
+                        <button class="btn-primary" id="search-submit-btn">Search Roles</button>
+                    </div>
+
+                    <!-- Job Listings Grid Header -->
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">Verified Job Listings</h2>
+                            <p class="section-subtitle" id="listings-count-label">Showing 0 available listings</p>
+                        </div>
+                    </div>
+
+                    <!-- Job Cards Grid -->
+                    <div class="job-grid" id="explore-jobs-grid">
+                        <!-- Injected dynamically by app.js -->
+                    </div>
+                </section>
+
+                <!-- 2. JOB SEEKER DASHBOARD VIEW -->
+                <section class="view-section animate-fade" id="seeker-dash-view">
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">Candidate Dashboard</h2>
+                            <p class="section-subtitle">Manage your professional skills profiles and review active applications progress.</p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-layout">
+                        <!-- Left Side: Profile Card Builder -->
+                        <aside class="dashboard-sidebar">
+                            <div class="sidebar-card">
+                                <h3 class="card-title">Professional Profile</h3>
+                                <form id="seeker-profile-form">
+                                    <div class="form-group">
+                                        <label for="seeker-contact">Contact Email/Phone</label>
+                                        <input type="text" id="seeker-contact" placeholder="e.g. contact@domain.com / +91...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="seeker-skills">Skills & Tags (Comma Separated)</label>
+                                        <input type="text" id="seeker-skills" placeholder="e.g. Rust, NodeJS, CSS3, APIs">
+                                        <div class="skills-tags-display" id="profile-skills-display"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="seeker-exp">Professional Experience / Summary</label>
+                                        <textarea id="seeker-exp" rows="6" placeholder="Describe your coding experience, previous roles, or educational backgrounds..."></textarea>
+                                    </div>
+                                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Update Profile</button>
+                                </form>
+                            </div>
+                        </aside>
+
+                        <!-- Right Side: Applied Jobs logs -->
+                        <div class="dashboard-content">
+                            <div class="content-card">
+                                <h3 class="card-title">Submitted Job Applications</h3>
+                                <div class="table-wrapper">
+                                    <table class="dashboard-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Job Details</th>
+                                                <th>Employer</th>
+                                                <th>Submission Date</th>
+                                                <th>Review Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="seeker-applications-tbody">
+                                            <!-- Injected dynamically by app.js -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. EMPLOYER RECRUITER Panel VIEW -->
+                <section class="view-section animate-fade" id="employer-dash-view">
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">Employer Recruitment Panel</h2>
+                            <p class="section-subtitle">Track incoming candidate profiles, create high-paying job specs, and edit active posts.</p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-layout">
+                        <!-- Left Side: Company specs builder -->
+                        <aside class="dashboard-sidebar">
+                            <div class="sidebar-card">
+                                <h3 class="card-title">Recruiter Details</h3>
+                                <form id="employer-profile-form">
+                                    <div class="form-group">
+                                        <label for="employer-company-name">Company Name</label>
+                                        <input type="text" id="employer-company-name" placeholder="e.g. Acme Tech Labs">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="employer-contact">Inquiries Contact</label>
+                                        <input type="email" id="employer-contact" placeholder="e.g. hr@acmetech.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="employer-company-desc">About Company</label>
+                                        <textarea id="employer-company-desc" rows="6" placeholder="Describe your corporate vision, office locations, and working models..."></textarea>
+                                    </div>
+                                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Save Info</button>
+                                </form>
+                            </div>
+                        </aside>
+
+                        <!-- Right Side: Active Postings and Post Job Button -->
+                        <div class="dashboard-content">
+                            <div class="content-card">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                                    <h3 class="card-title" style="margin-bottom: 0;">Your Job Postings</h3>
+                                    <button class="btn-primary" id="employer-post-job-trigger" style="gap: 8px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                        Create New Post
+                                    </button>
+                                </div>
+
+                                <div class="table-wrapper">
+                                    <table class="dashboard-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Role Specifications</th>
+                                                <th>Posted On</th>
+                                                <th>Deadline</th>
+                                                <th>Listings Status</th>
+                                                <th>Actions / Applicants</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="employer-postings-tbody">
+                                            <!-- Injected dynamically by app.js -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- ==========================================
+             FOOTER
+             ========================================== -->
+        <footer>
+            <div class="container footer-inner">
+                <div class="footer-text">
+                    &copy; 2026 TalentHub Co. Open-source Systems Architecture Capstone. MIT License.
+                </div>
+                <div class="footer-links">
+                    <a href="#" id="footer-explore-link">Explore Listings</a>
+                    <a href="https://github.com" target="_blank" rel="noopener">GitHub Project</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- ==========================================
+             MODAL: USER REGISTRATION & AUTHENTICATION
+             ========================================== -->
+        <div class="modal-overlay" id="auth-overlay">
+            <div class="modal-card auth-modal">
+                <button class="modal-close-btn" id="auth-modal-close" aria-label="Close Modal">&times;</button>
+                
+                <div class="auth-tabs">
+                    <button class="auth-tab-btn active" id="auth-tab-login">Sign In</button>
+                    <button class="auth-tab-btn" id="auth-tab-register">Register</button>
+                </div>
+
+                <!-- Registration Role Selector Buttons (Only visible on register tab) -->
+                <div class="role-selector-wrapper" id="role-selector-wrapper" style="display: none;">
+                    <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px;">Select User Role</label>
+                    <div class="role-selector">
+                        <button class="role-btn active" data-role="seeker">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            Job Seeker
+                        </button>
+                        <button class="role-btn" data-role="employer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                            Employer
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Shared Credentials Input Form -->
+                <form id="auth-credentials-form">
+                    <div class="form-group">
+                        <label for="auth-username">Username</label>
+                        <input type="text" id="auth-username" required placeholder="Enter username...">
+                    </div>
+                    <div class="form-group">
+                        <label for="auth-password">Password</label>
+                        <input type="password" id="auth-password" required placeholder="Minimum 6 characters...">
+                    </div>
+                    <div class="auth-error-msg" id="auth-error-display"></div>
+                    <button type="submit" class="btn-primary" id="auth-submit-btn" style="width: 100%; justify-content: center; height: 48px; margin-top: 16px;">
+                        Let's Go
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             MODAL: JOB DETAILS & APPLICATION SUBMISSION
+             ========================================== -->
+        <div class="modal-overlay" id="job-details-overlay">
+            <div class="modal-card job-details-modal">
+                <button class="modal-close-btn" id="job-details-close" aria-label="Close Modal">&times;</button>
+                
+                <div class="job-details-container" id="job-details-inner">
+                    <!-- Injected dynamically by app.js -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             MODAL: RECRUITER POST / EDIT JOB LISTING
+             ========================================== -->
+        <div class="modal-overlay" id="job-form-overlay">
+            <div class="modal-card job-form-modal">
+                <button class="modal-close-btn" id="job-form-close" aria-label="Close Modal">&times;</button>
+                
+                <h3 class="modal-heading" id="job-form-title">Create Job Posting</h3>
+                <form id="employer-job-form">
+                    <input type="hidden" id="job-form-id">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="job-form-title-input">Job Title</label>
+                            <input type="text" id="job-form-title-input" required placeholder="e.g. Junior Node Web Engineer">
+                        </div>
+                        <div class="form-group">
+                            <label for="job-form-type">Job Type</label>
+                            <select id="job-form-type" required>
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                                <option value="Remote">Remote</option>
+                                <option value="Contract">Contract</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="job-form-location">Office Location</label>
+                            <input type="text" id="job-form-location" required placeholder="e.g. Bengaluru (Hybrid), Remote, New Delhi">
+                        </div>
+                        <div class="form-group">
+                            <label for="job-form-salary">Salary Bounds</label>
+                            <input type="text" id="job-form-salary" required placeholder="e.g. ₹6,00,000 - ₹9,00,000 PA">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="job-form-deadline">Application Deadline</label>
+                            <input type="date" id="job-form-deadline" required>
+                        </div>
+                        <div class="form-group" id="job-form-filled-group" style="display: none;">
+                            <label for="job-form-filled">Listing State</label>
+                            <select id="job-form-filled">
+                                <option value="false">Active (Open)</option>
+                                <option value="true">Closed (Filled)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="job-form-reqs">Requirements (Comma Separated)</label>
+                        <input type="text" id="job-form-reqs" required placeholder="e.g. 2+ Years Experience, NodeJS Backend, AWS Deployment">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="job-form-desc">Full Job Description</label>
+                        <textarea id="job-form-desc" rows="6" required placeholder="Provide an detailed overview of the role, responsibilities, culture, and team interfaces..."></textarea>
+                    </div>
+
+                    <div class="auth-error-msg" id="job-form-error-display"></div>
+                    <div style="display: flex; gap: 16px; margin-top: 24px;">
+                        <button type="button" class="btn-secondary" id="job-form-cancel" style="flex-grow: 1; justify-content: center; height: 48px;">Cancel</button>
+                        <button type="submit" class="btn-primary" style="flex-grow: 2; justify-content: center; height: 48px;">Publish Listing</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             MODAL: RECRUITER CANDIDATE APPLICATIONS VIEWER
+             ========================================== -->
+        <div class="modal-overlay" id="applicants-overlay">
+            <div class="modal-card applicants-modal">
+                <button class="modal-close-btn" id="applicants-close" aria-label="Close Modal">&times;</button>
+                
+                <h3 class="modal-heading" id="applicants-job-title">Candidate Profiles Review</h3>
+                <p class="section-subtitle" style="margin-bottom: 24px;">Review skill summaries, experience paragraphs, cover letters, and toggle recruitment milestones.</p>
+
+                <!-- Applications List -->
+                <div class="applicants-list" id="recruiter-applicants-container">
+                    <!-- Injected dynamically by app.js -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Core Dynamic Script -->
+    <script src="app.js"></script>
+</body>
+</html>

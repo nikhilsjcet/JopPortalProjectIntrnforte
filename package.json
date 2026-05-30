@@ -1,0 +1,15 @@
+{
+  "name": "talenthub",
+  "version": "1.0.0",
+  "description": "Premium Full-Stack Open-Source Job Portal Web Application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cookie-parser": "^1.4.6"
+  },
+  "author": "TalentHub Core Contributors",
+  "license": "MIT"
+}
