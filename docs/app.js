@@ -1,16 +1,36 @@
 /* ==========================================
    GLOBAL API BASE CONFIGURATION & CORS PROXY
    ========================================== */
-const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? ''
-    : 'https://jopportalprojectintrnforte.onrender.com';
+const API_BASE_URL = (() => {
+    const hostname = window.location.hostname;
+    const port = window.location.port;
+    const protocol = window.location.protocol;
 
-// Overload fetch locally to inject CORS credentials and Render API Base URL dynamically
-async function fetch(endpoint, options = {}) {
-    const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint}`;
-    options.credentials = 'include';
-    return window.fetch(url, options);
-}
+    // If running on local development hostnames
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        // If served from the node server itself (port 8080), use relative URLs
+        // Otherwise (e.g. VS Code Live Server on port 5500), target the Express backend on port 8080
+        return port === '8080' ? '' : 'http://localhost:8080';
+    }
+    // If double-clicked as a local file (file:/// protocol)
+    if (protocol === 'file:') {
+        return 'http://localhost:8080';
+    }
+    // Deployed production environment (e.g. GitHub Pages) targets the live Render API
+    return 'https://jopportalprojectintrnforte.onrender.com';
+})();
+
+// Monkey patch global window.fetch to inject CORS credentials and Render API Base URL dynamically
+const nativeFetch = window.fetch;
+window.fetch = async (endpoint, options = {}) => {
+    const url = typeof endpoint === 'string' && !endpoint.startsWith('http') ? `${API_BASE_URL}${endpoint}` : endpoint;
+    
+    // Only include credentials if we are not on a file:// protocol (which doesn't support them and causes CORS blocks)
+    if (window.location.protocol !== 'file:') {
+        options.credentials = 'include';
+    }
+    return nativeFetch(url, options);
+};
 
 /* ==========================================
    GLOBAL APP STATE CONTAINER
