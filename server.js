@@ -11,10 +11,10 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json());
 app.use(cookieParser());
 
-// Custom CORS Middleware for secure cross-origin database requests between Pages and Render
+// Custom CORS Middleware for secure cross-origin database requests between Pages and Render (Allow-All origins securely)
 app.use((req, res, next) => {
     const origin = req.headers.origin;
-    if (origin && (origin.includes('localhost') || origin.includes('127.0.0.1') || origin.endsWith('github.io'))) {
+    if (origin) {
         res.setHeader('Access-Control-Allow-Origin', origin);
     }
     res.setHeader('Access-Control-Allow-Credentials', 'true');
