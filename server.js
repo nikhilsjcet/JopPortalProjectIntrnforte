@@ -10,6 +10,24 @@ const PORT = process.env.PORT || 8080;
 // 1. Core Middlewares
 app.use(express.json());
 app.use(cookieParser());
+
+// Custom CORS Middleware for secure cross-origin database requests between Pages and Render
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (origin && (origin.includes('localhost') || origin.includes('127.0.0.1') || origin.endsWith('github.io'))) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie');
+    
+    // Handle preflight OPTIONS request
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+    next();
+});
+
 app.use(express.static(path.join(__dirname, 'docs')));
 
 // 2. Establish MongoDB Database Connection dynamically with Hybrid Resilient Fallback

@@ -1,4 +1,18 @@
 /* ==========================================
+   GLOBAL API BASE CONFIGURATION & CORS PROXY
+   ========================================== */
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? ''
+    : 'https://jopportalprojectintrnforte.onrender.com';
+
+// Overload fetch locally to inject CORS credentials and Render API Base URL dynamically
+async function fetch(endpoint, options = {}) {
+    const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint}`;
+    options.credentials = 'include';
+    return window.fetch(url, options);
+}
+
+/* ==========================================
    GLOBAL APP STATE CONTAINER
    ========================================== */
 const STATE = {
